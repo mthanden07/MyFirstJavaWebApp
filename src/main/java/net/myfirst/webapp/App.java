@@ -39,11 +39,9 @@ public class App {
         get("/greet/:username", (req, res) -> {
             return "Hello  " + req.params(":username");
         });
-       /* get("/greet/:username/language/:language", (req, res) -> {
-            return "Hello  " + req.params("username") + "  How are you ?";
-        });*/
 
-        get("/greet/:username/language/:language", (req, res) -> {
+
+        post("/greet/:username/language/:language", (req, res) -> {
             if (req.params(":language").equals("English")) {
                 return "Hello  " + req.params("username") + "  How are you ?";
             } else if (req.params(":language").equals("IsiZulu")) {
@@ -71,9 +69,11 @@ public class App {
 
         get("/hello", (req, res) ->{
 
-            
+
             Map<String, Object> map = new HashMap<>();
-            map.put("count", 2);
+            map.put("count", 0);
+            map.put("greeting", 0);
+            map.put("language", "");
 
             return new ModelAndView(map, "hello.handlebars");
 
@@ -96,16 +96,8 @@ public class App {
 
         }, new HandlebarsTemplateEngine());
 
-        post("/greeted/:username",(req,response)->{
-            int greeted = 0;
-            for(String user : list){
-                if(user.equals(req.queryParams("username"))){
-                    greeted++;
-                }
-            }
-            //System.out.println("Hello");
-            return  "You have been greeted  " +  greeted;
 
-        });
+
       }
+
 }
