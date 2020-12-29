@@ -15,8 +15,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.0</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>8</source>
+                    <target>8</target>
                 </configuration>
             </plugin>
 
@@ -27,7 +27,7 @@
                 <version>2.0.13</version>
                 <configuration>
                     <processTypes>
-                        <web>java $JAVA_OPTS -cp target/classes:target/net/myfirst/webapp/* App-+-+-+-+</web>
+                        <web>java $JAVA_OPTS -cp target/classes:target/dependency/* net.myfirst.webapp</web>
                     </processTypes>
                 </configuration>
             </plugin>

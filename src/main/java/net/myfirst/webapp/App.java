@@ -23,65 +23,53 @@ public class App {
         if (processBuilder.environment().get("PORT") != null) {
             return Integer.parseInt(processBuilder.environment().get("PORT"));
         }
-        return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
+        return 8080; //return default port if heroku-port isn't set (i.e. on localhost)
     }
-
-
 
 
     public static void main(String[] args) {
         port(getHerokuAssignedPort());
         int count = 0;
+
         List<String> list = new ArrayList<>();
 
         staticFiles.location("/public/");
-        get("/greet", (req, res) -> "Hello");
-        get("/greet/:username", (req, res) -> {
-            return "Hello  " + req.params(":username");
-        });
 
 
-        post("/greet/:username/language/:language", (req, res) -> {
+get("/greet/:name",(req, res)->{
+    return "Hello " + req.params("name");
+});
+        get("/greet/:username/language/:language", (req, res) -> {
             if (req.params(":language").equals("English")) {
-                return "Hello  " + req.params("username") + "  How are you ?";
+                return  "Hello  " + req.params("username") + "  How are you ?";
             } else if (req.params(":language").equals("IsiZulu")) {
                 return "Sawubona  " + req.params("username") + "  Unjani ?";
             }
-        else if (req.params(":language").equals("IsiXhosa")) {
-            return "Molweni  " + req.params("username") + "  Kunjani ?";
-        }
+            else if (req.params(":language").equals("IsiXhosa")) {
+                return "Molweni  " + req.params("username") + "  Kunjani ?";
+            }
             else if (req.params(":language").equals("Sotho")) {
 
-                return "Dumelang  " + req.params("username") + "  Ojwang ?";
+                return "Dumelang  " + req.params("username") + "  Ojwang ?";}
+            else  if (req.params(":language").equals("TsotsiTal")){
+                return "Eita da !!  " + req.params("username") + "  Unjani Skhokho ?";
             }
-          else  if (req.params(":language").equals("TsotsiTal")){
-              return "Eita da !!  " + req.params("username") + "  Unjani Skhokho ?";
-            }
-          else return "What are you trying to happen ?";
+            else return "What are you trying to happen ?";
         });
-       // stop();
 
-        post("/greet",(req,response)->{
-            //System.out.println("Hello");
-            return  "Hello!!!!  " +  req.queryParams("username");
 
-        });
 
         get("/hello", (req, res) ->{
-
-
             Map<String, Object> map = new HashMap<>();
-            map.put("count", 0);
-            map.put("greeting", 0);
-            map.put("language", "");
 
+            map.put("greeting","greeting");
+            map.put("language", "");
+            map.put("count", 1);
             return new ModelAndView(map, "hello.handlebars");
 
         }, new HandlebarsTemplateEngine());
 
-
         post("/hello", (req, res) -> {
-
             Map<String, Object> map = new HashMap<>();
 
             // create the geeting message
@@ -95,6 +83,8 @@ public class App {
             return new ModelAndView(map, "hello.handlebars");
 
         }, new HandlebarsTemplateEngine());
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            System.out.println("This is my print out " + count);
 
       }
 }
